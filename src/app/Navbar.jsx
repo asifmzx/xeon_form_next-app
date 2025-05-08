@@ -1,11 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
 import xeonwhite from "@/assets/xeonwhite.png";
 import xeonlogo from "@/assets/xeonlogo.png";
 
 export default function Navbar() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const pathname = usePathname();
 
   useEffect(() => {
     // Check if window is defined (to avoid SSR errors)
@@ -20,6 +23,8 @@ export default function Navbar() {
       return () => mediaQuery.removeEventListener("change", handler);
     }
   }, []);
+
+  const currentPath = usePathname();
 
   return (
     <>
@@ -59,12 +64,20 @@ export default function Navbar() {
           >
             Contact Us
           </a>
-          <a
-            className="hover:text-[#c2cc33]"
-            href="http://localhost:3000/joinWithUs"
+          <Link
+            href="/joinWithUs"
+            className={`hover:text-[#c2cc33] ${currentPath === "/joinWithUs" ? "text-[#c2cc33]" : ""
+              }`}
           >
             Career
-          </a>
+          </Link>
+          <Link
+            href="/employer"
+            className={`hover:text- ${currentPath === "/employer" ? "text-[#c2cc33]" : ""
+              }`}
+          >
+            <span>Employer</span><sub className="Dev text-xs text-red-600 mt-10">dev</sub>
+          </Link>
         </div>
       </nav>
     </>

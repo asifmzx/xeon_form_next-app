@@ -5,10 +5,14 @@ export default function Formv2() {
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
-    name: "",
     email: "",
     phone: "",
     CV: "",
+    degree: "",
+    start_year: "",
+    linkedin: "",
+    source: "",
+    prolang: "",
   });
 
   const handleChange = (e) => {
@@ -21,12 +25,11 @@ export default function Formv2() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    // console.log("Form submitted:", formData);
     const existingData = JSON.parse(localStorage.getItem("employees")) || [];
     existingData.map((employees, index) => {
-      console.log(employees.first_name);
+      console.log(employees);
     });
-    console.log(existingData[0].phone = data);
     existingData.push(formData);
     localStorage.setItem("employees", JSON.stringify(existingData));
   };
@@ -51,7 +54,9 @@ export default function Formv2() {
               name="first_name"
               value={formData.first_name}
               onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              required
+              placeholder="John"
+              className="mt-1 block w-full px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
 
@@ -64,8 +69,10 @@ export default function Formv2() {
               id="last_name"
               name="last_name"
               value={formData.last_name}
+              required
               onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Doe"
+              className="mt-1 block w-full px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
         </div>
@@ -80,7 +87,8 @@ export default function Formv2() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            placeholder="johndoe@email.com"
+            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             required
           />
         </div>
@@ -106,7 +114,7 @@ export default function Formv2() {
           <label htmlFor="phone" className="text-xl font-medium text-red-500">
             *
           </label>
-          <input type="tel" id="phone" name="phone" placeholder="01*********" value={formData.phone} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          <input type="tel" id="phone" name="phone" placeholder="01*********" value={formData.phone} onChange={handleChange} className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             required />
         </div>
 
@@ -122,8 +130,10 @@ export default function Formv2() {
             name="CV"
             rows="4"
             value={formData.CV}
+            placeholder="Paste your CV here"
+            required
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           ></textarea>
         </div>
 
@@ -133,52 +143,77 @@ export default function Formv2() {
           <div className="mt-2 flex flex-row w-full justify-between gap-4">
             <div className="w-full block px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
               <label className="block text-sm font-medium">
-                <span className="font-bold">Degree</span><span className="text-red-500">*</span>
+                <span className="font-bold px-1">Degree</span><span className="text-red-500">*</span>
               </label>
               <select
                 className="w-full block focus:outline-none"
+                id="degree"
+                name="degree"
+                value={formData.degree}
+                onChange={handleChange}
               >
-                <option value="" >Select...</option>
-                <option value="High School">High School</option>
-                <option value="Bachelor's Degree">Bachelor's Degree</option>
-                <option value="Master's Degree">Master's Degree</option>
-                <option value="PhD">PhD</option>
+                <option value="" className="text-gray-900">Select...</option>
+                <option value="High School" className="text-gray-900">High School</option>
+                <option value="Bachelor's Degree" className="text-gray-900">Bachelor's Degree</option>
+                <option value="Master's Degree" className="text-gray-900">Master's Degree</option>
+                <option value="PhD" className="text-gray-900">PhD</option>
               </select>
             </div>
+
             {/* EDUCTAION -> Date */}
-            <div className="w-full block px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            <div className="w-full block px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
               <label className="block text-sm font-medium">
                 <span className="font-bold">Start date year</span><span className="text-red-500">*</span>
               </label>
-              <input type="number" min={1950} max={2025} required className="w-full block focus:outline-none" placeholder="1960" />
+              <input type="number" min={1950} max={2025} required className="w-full block focus:outline-none" placeholder="1960"
+                id="start_year"
+                name="start_year"
+                onChange={handleChange}
+                value={formData.start_year} />
             </div>
           </div>
           <div className="mt-2"></div>
           <a href="" className=" text-blue-500 underline">Add another</a>
         </div>
 
-        <div className="w-full block px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        <div className="w-full block px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
           <label className="block text-sm font-medium">
             <span className="font-bold">Source (ZipRecruiter, Indeed, LinkedIn etc.)</span><span className="text-red-500">*</span>
           </label>
-          <input type="text" className="w-full block focus:outline-none" />
+          <input type="text" className="w-full block focus:outline-none"
+            id="source"
+            name="source"
+            onChange={handleChange}
+            placeholder="LinkedIn"
+            required
+            value={formData.source} />
         </div>
 
-        <div className="w-full block px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        <div className="w-full block px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
           <label className="block text-sm font-medium">
             <span className="font-bold">LinkedIn profile link</span>
           </label>
-          <input type="text" className="w-full block focus:outline-none" />
+          <input type="text" className="w-full block focus:outline-none"
+            id="linkedin"
+            name="linkedin"
+            onChange={handleChange}
+            placeholder="www.linkedin.com/yourprofile"
+            value={formData.linkedin} />
         </div>
 
         <div className="w-full block px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
           <label className="block text-sm font-medium">
-            <span className="font-bold">Have you learned or worked with at least two programming languages?</span><span className="text-red-500">*</span>
+            <span className="font-bold px-1">Have you learned or worked with at least two programming languages?</span><span className="text-red-500">*</span>
           </label>
-          <select className="w-full block focus:outline-none">
-            <option name="ProLang">Select...</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+          <select className="w-full block focus:outline-none"
+            id="prolang"
+            name="prolang"
+            onChange={handleChange}
+            value={formData.prolang}
+          >
+            <option value="" className="text-gray-900">Select...</option>
+            <option value="yes" className="text-gray-900">Yes</option>
+            <option value="no" className="text-gray-900">No</option>
           </select>
         </div>
 
