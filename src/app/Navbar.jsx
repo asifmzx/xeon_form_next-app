@@ -29,7 +29,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="flex justify-between items-center w-[92%]  h-20 mx-auto">
+      <nav className="flex justify-between items-center w-[92%] h-20 mx-auto">
         <div>
           <a href="https://www.xeontechnology.ltd/">
             <Image
@@ -43,7 +43,7 @@ export default function Navbar() {
         <div className="flex gap-[2vw]">
           <Link
             href="/"
-            className={`hover:text- ${currentPath === "/employer" ? "text-[#c2cc33]" : ""
+            className={`hover:text- ${currentPath === "/" ? "text-[#c2cc33]" : ""
               }`}
           >
             Home
@@ -71,7 +71,7 @@ export default function Navbar() {
             className={`hover:text-[#c2cc33] ${currentPath === "/joinWithUs" ? "text-[#c2cc33]" : ""
               }`}
           >
-            Career
+            <span>Career</span><sub className="Dev text-xs text-red-600 mt-10">dev</sub>
           </Link>
           <Link
             href="/employer"
