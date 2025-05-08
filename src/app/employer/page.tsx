@@ -1,5 +1,5 @@
+"use client";
 import React from "react";
-import Formv2 from "@/components/Formv2";
 
 export default function page() {
   return (
