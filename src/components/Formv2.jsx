@@ -23,17 +23,16 @@ export default function Formv2() {
     }));
   };
 
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
-    debugger
     const existingData = JSON.parse(localStorage.getItem("employees")) || [];
-    existingData.map((employees, index) => {
-      console.log(employees);
-    });
     existingData.push(formData);
     localStorage.setItem("employees", JSON.stringify(existingData));
+    window.location.reload();
   };
+
 
 
 
