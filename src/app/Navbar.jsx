@@ -15,6 +15,7 @@ export default function Navbar() {
     if (typeof window !== "undefined") {
       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
       setIsDarkTheme(mediaQuery.matches);
+      console.log("isDarkTheme", mediaQuery.matches);
 
       // Optional: Add listener for theme changes
       const handler = (e) => setIsDarkTheme(e.matches);
@@ -28,11 +29,11 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="flex justify-between items-center w-[92%] h-20 mx-auto">
+      <nav className="flex justify-between items-center w-[92%]  h-20 mx-auto">
         <div>
           <a href="https://www.xeontechnology.ltd/">
             <Image
-              src={isDarkTheme ? xeonlogo : xeonwhite}
+              src={isDarkTheme ? xeonwhite : xeonlogo}
               width={150}
               height={60}
               alt="Xeon logo"
@@ -40,12 +41,13 @@ export default function Navbar() {
           </a>
         </div>
         <div className="flex gap-[2vw]">
-          <a
-            className="hover:text-[#c2cc33]"
-            href="https://www.xeontechnology.ltd/"
+          <Link
+            href="/"
+            className={`hover:text- ${currentPath === "/employer" ? "text-[#c2cc33]" : ""
+              }`}
           >
             Home
-          </a>
+          </Link>
           <a className="hover:text-[#c2cc33]" href="#">
             Products
           </a>
