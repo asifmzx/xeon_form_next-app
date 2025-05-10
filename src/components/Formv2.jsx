@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 
-export default function Formv2({ initialData = {}, onSubmit, isEditMode = false }) {
+export default function Formv2({ initialData = {}, onSubmit = any, isEditMode = false }) {
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
