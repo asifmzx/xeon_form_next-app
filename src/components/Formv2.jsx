@@ -1,8 +1,7 @@
-"use client"
-import { useState } from "react";
+"use client";
+import { useState, useEffect } from "react";
 
-export default function Formv2() {
-
+export default function Formv2({ initialData = {}, onSubmit, isEditMode = false }) {
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -14,9 +13,17 @@ export default function Formv2() {
     linkedin: "",
     source: "",
     prolang: "",
+    ...initialData
   });
 
   const [errors, setErrors] = useState({});
+
+
+  useEffect(() => {
+    if (isEditMode && initialData) {
+      setFormData(initialData);
+    }
+  }, [initialData, isEditMode]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,21 +33,20 @@ export default function Formv2() {
     }));
   };
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = validateForm(formData);
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      const existingData = JSON.parse(localStorage.getItem("employees")) || [];
-      existingData.push(formData);
-      console.log("Form submitted successfully", formData);
-      localStorage.setItem("employees", JSON.stringify(existingData));
-      window.location.reload();
-    } else {
-      console.log("Form submission failed", newErrors);
+      if (typeof onSubmit === 'function') {
+        onSubmit(formData);
+      } else {
+        const existingData = JSON.parse(localStorage.getItem("employees")) || [];
+        existingData.push(formData);
+        localStorage.setItem("employees", JSON.stringify(existingData));
+        window.location.reload();
+      }
     }
   };
 
@@ -324,7 +330,7 @@ export default function Formv2() {
             type="submit"
             className="w-50 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-md font-medium text-white bg-indigo-500 hover:bg-[#c2cc33] hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Submit Application
+            {isEditMode ? "Update Application" : "Submit Application"}
           </button>
         </div>
 
