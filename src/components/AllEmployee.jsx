@@ -27,11 +27,15 @@ const EmployeeGrid = () => {
                     {employees.map((employee, index) => (
                         <div key={employee.phone} className="border rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow">
                             <div className="grid grid-cols-2 gap-2 mb-3">
-                                <div className="font-semibold">First Name:</div>
-                                <div>{employee.first_name}</div>
+                                <div className="font-semibold">Name:</div>
+                                <div>
+                                    <span>{employee.first_name}</span>
+                                    <span className="mx-0.5"></span>
+                                    <span>{employee.last_name}</span>
+                                </div>
 
-                                <div className="font-semibold">Last Name:</div>
-                                <div>{employee.last_name}</div>
+                                {/* <div className="font-semibold">Last Name:</div>
+                                <div>{employee.last_name}</div> */}
 
                                 <div className="font-semibold">Email:</div>
                                 <div className="break-all">{employee.email}</div>
